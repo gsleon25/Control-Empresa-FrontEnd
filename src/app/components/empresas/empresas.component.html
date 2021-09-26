@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Rol</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let empre of empresasList">
+      <th scope="row">{{ empre._id }}</th>
+      <td>{{empre.nombre}}</td>
+      <td>{{empre.usuario}}</td>
+      <td>{{empre.rol}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button type="button" class="btn btn-success">Agregar</button>
+          <button type="button" class="btn btn-warning" (click)="obtenerEmpresaID(empre._id)">Editar</button>
+          <button type="button" class="btn btn-danger">Eliminar</button>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>

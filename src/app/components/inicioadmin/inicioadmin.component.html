@@ -1,0 +1,127 @@
+
+<div class="text-center" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AgregarEmpresa">
+    <span class="bi bi-pencil-square"></span> <h3>Agregar Empresa</h3>
+  </button>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Usuario</th>
+      <th scope="col">Rol</th>
+      <th scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let empre of empresasList">
+      <th scope="row">{{ empre._id }}</th>
+      <td>{{empre.nombre}}</td>
+      <td>{{empre.usuario}}</td>
+      <td>{{empre.rol}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+
+          <button type="button" class="btn btn-warning" (click)="obtenerEmpresaId(empre._id)" data-bs-toggle="modal" data-bs-target="#EditarEmpresa">Editar</button>
+          <button type="button" class="btn btn-danger" (click)="obtenerEmpresaId(empre._id)" data-bs-toggle="modal" data-bs-target="#EliminarEmpresa">Eliminar</button>
+        </div>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<!-- Modal Agregar-->
+<div class="modal fade " id="AgregarEmpresa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Empresa</h5>
+      </div>
+      <div class="modal-body">
+
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Nombre Empresa</label>
+            <input type="text"  class="form-control" name="nombreEmpresa" #nombreEmpresa="ngModel" [(ngModel)]="empresaIDModel.nombre">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Nombre Usuario</label>
+            <input type="text"  class="form-control" name="usuarioEmpresa" #usuarioEmpresa="ngModel" [(ngModel)]="empresaIDModel.usuario">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contraseña Empresa</label>
+            <input type="password"  class="form-control" name="contraseñaEmpresa" #contraseñaEmpresa="ngModel" [(ngModel)]="empresaIDModel.password">
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="agregarEmpresas()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL EDITAR USUARIO-->
+<div class="modal fade" id="EditarEmpresa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Empresa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Nombre</label>
+            <input type="text" class="form-control"
+            name="nombre" #nombre="ngModel" [(ngModel)]="empresaIDModel.nombre">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Usuario</label>
+            <input type="text" class="form-control"
+            name="usuario" #usuario="ngModel" [(ngModel)]="empresaIDModel.usuario">
+          </div>
+          <!--
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control"
+            name="password" #password="ngModel" [(ngModel)]="empresaIDModel.password">
+          </div>
+        -->
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-primary" (click)="editarEmpresa(empresaIDModel._id)">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="EliminarEmpresa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Eliminar Empresa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center text-uppercase ">
+        ¿Está seguro de eliminar la empresa?
+
+      </div>
+      <p class="text-center fst-italic"> {{ empresaIDModel.nombre }}</p>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Atras</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+         (click)="eliminarEmpresa(empresaIDModel._id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
